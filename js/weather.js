@@ -1,5 +1,5 @@
 const APIkey = "ub4rdc9RkF1u6wNVB0kfkBXGJXOeG7kJ"
-const baseUrl = "http://dataservice.accuweather.com/"
+const baseUrl = "https://dataservice.accuweather.com/"  // Changed to HTTPS
 
 const getCityUrl = cityName => `${baseUrl}locations/v1/cities/search?apikey=${APIkey}&q=${cityName}`
 
@@ -7,7 +7,6 @@ const getWeatherUrl = cityKey => `${baseUrl}currentconditions/v1/${cityKey}?apik
 
 const fetchData = async url => {
     try {
-
         const response = await fetch(url)
 
         if (!response.ok) {
@@ -15,15 +14,11 @@ const fetchData = async url => {
         }
 
         return response.json()
-
     } catch ({ name, message }) {
         alert(`${name}? ${message}`)
     }
 }
 
-const getCityData = cityName => fetchData((getCityUrl(cityName)))
+const getCityData = cityName => fetchData(getCityUrl(cityName))
 
 const getCityWeather = cityKey => fetchData(getWeatherUrl(cityKey))
-
-
-
